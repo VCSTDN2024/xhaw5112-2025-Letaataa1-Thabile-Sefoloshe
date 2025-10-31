@@ -10,6 +10,7 @@
 <body>
 
 <div class="navbar">
+   <!-- Top navigation bar: site-wide links with icons -->
   <a href="homepage.html"><i class="fa fa-home"></i>Home</a>
   <a href="6month.html"><i class="fa fa-calendar"></i>6-Month Courses</a>
   <a href="6week.html"><i class="fa fa-clock"></i>6-Week Courses</a>
@@ -20,6 +21,7 @@
   <a href="userprofile.html"><i class="fa fa-user"></i>profile</a>
 </div>
 
+ <!-- Main content container with glass effect (styled via CSS) -->
 <div class="glass">
     <!DOCTYPE html>
 <html lang="en">
@@ -30,16 +32,20 @@
 </head>
 <body>
   
-
+    <!-- Register form section (should be top-level inside .glass) -->
+    <!-- Form fields: username, password and confirm password -->
   <h1>Register</h1>
 
   <form id="registerForm">
+    <!-- Username input -->
     <label for="username">Username</label>
     <input type="text" id="username" placeholder="Choose a username" required>
 
+     <!-- Password inputs -->
     <label for="password">Password</label>
     <input type="password" id="password" placeholder="Choose a password" required>
 
+ <!-- Form actions: submit registers user, reset clears fields -->
     <label for="confirmPassword">Confirm Password</label>
     <input type="password" id="confirmPassword" placeholder="Confirm password" required>
 
@@ -51,6 +57,11 @@
     <p>Empowering the web ©</p>
   </div>
 
+<!-- Client-side registration script:
+         - Prevents default form submit
+         - Validates matching passwords
+         - Checks for duplicate usernames in localStorage
+         - Saves new user list to localStorage and redirects to login page -->  
   <script>
     const registerForm = document.getElementById("registerForm");
 
@@ -84,6 +95,7 @@
   </script>
 </body>
 
+<!-- Page footer with social links (open in new tab) -->
 <footer>
   <div class="social-links">
     <a href="https://www.facebook.com/share/1D8UUVruFP/?mibextid=wwXIfr" target="_blank"><i class="fab fa-facebook-f"></i></a>

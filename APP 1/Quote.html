@@ -33,6 +33,7 @@ button{margin-top:10px;padding:10px;width:100%;border:none;border-radius:5px;bac
 </head>
 <body>
 
+<!-- Navigation bar linking to other pages -->
 <div class="navbar">
   <a href="homepage.html"><i class="fa fa-home"></i>Home</a>
   <a href="6month.html"><i class="fa fa-calendar"></i>6-Month Courses</a>
@@ -46,6 +47,7 @@ button{margin-top:10px;padding:10px;width:100%;border:none;border-radius:5px;bac
 <div class="glass">
   <h2>Select Courses</h2>
   
+  <!-- Form containing course checkboxes and action buttons. -->
   <form id="courseForm">
     <label><input type="checkbox" name="course" value="750"> Child minding (R750)</label><br>
     <label><input type="checkbox" name="course" value="750"> Cooking (R750)</label><br>
@@ -59,18 +61,23 @@ button{margin-top:10px;padding:10px;width:100%;border:none;border-radius:5px;bac
     <button type="button" onclick="saveSelectedCourses()">Save Selected Courses</button>
   </form>
 
+ <!-- Area where calculation results are displayed -->
   <h3 id="result"></h3>
 
   <script>
+    // Calculate subtotal, discount and final total based on selected checkboxes.
     function calculateDiscount() {
+      // Get all checked course checkboxes
       const checkboxes = document.querySelectorAll('input[name="course"]:checked');
       const numCourses = checkboxes.length;
       let total = 0;
 
+      // Sum the numeric values (prices) of selected checkboxes
       checkboxes.forEach(cb => {
         total += parseFloat(cb.value);
       });
 
+       // Determine discount percentage by number of selected courses
       let discount = 0;
       if (numCourses === 2) {
         discount = 0.05;
@@ -79,7 +86,7 @@ button{margin-top:10px;padding:10px;width:100%;border:none;border-radius:5px;bac
       } else if (numCourses > 3) {
         discount = 0.15;
       }
-
+ // Compute discounted total and savings
       const discountedTotal = total * (1 - discount);
       const savings = total - discountedTotal;
       const percent = Math.round(discount * 100);
@@ -87,13 +94,19 @@ button{margin-top:10px;padding:10px;width:100%;border:none;border-radius:5px;bac
       document.getElementById('result').textContent =
         `You selected ${numCourses} course(s). Subtotal: R${total.toFixed(2)} | Discount: ${percent}% (You save R${savings.toFixed(2)}) | Total: R${discountedTotal.toFixed(2)}`;
     }
+
+     // Save selected courses to the user's profile stored in localStorage
     function saveSelectedCourses() {
+      // Check for logged-in user (stored as 'currentUser' in localStorage)
       const username = localStorage.getItem('currentUser');
       if(!username) {
+        // If no user is logged in, prompt and redirect to login page
         alert('Please login to save courses.');
         window.location.href = 'login.html';
         return;
       }
+
+      // Collect selected course objects { name, price }
       const checkboxes = document.querySelectorAll('input[name="course"]');
       const selected = [];
       checkboxes.forEach(input => {
@@ -105,6 +118,7 @@ button{margin-top:10px;padding:10px;width:100%;border:none;border-radius:5px;bac
         }
       });
 
+       // Require at least one selection to save
       if(selected.length === 0) {
         alert('Select at least one course to save.');
         return;
@@ -118,11 +132,14 @@ button{margin-top:10px;padding:10px;width:100%;border:none;border-radius:5px;bac
           profile.savedCourses.push(c);
         }
       });
+      // Persist updated profile and navigate to user page
       localStorage.setItem(profileKey, JSON.stringify(profile));
       alert('Courses saved. Redirecting to your page...');
       window.location.href = 'user.html';
     }
   </script>
+
+   <!-- Footer social links: open in new tabs -->
 <footer>
   <div class="social-links">
     <a href="https://www.facebook.com/share/1D8UUVruFP/?mibextid=wwXIfr" target="_blank"><i class="fab fa-facebook-f"></i></a>

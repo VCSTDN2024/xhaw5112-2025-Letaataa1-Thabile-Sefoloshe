@@ -10,6 +10,7 @@
 <body>
 
 <div class="navbar">
+  <!-- Navigation bar with icons and links -->
   <a href="homepage.html"><i class="fa fa-home"></i>Home</a>
   <a href="6month.html"><i class="fa fa-calendar"></i>6-Month Courses</a>
   <a href="6week.html"><i class="fa fa-clock"></i>6-Week Courses</a>
@@ -20,13 +21,18 @@
   <a href="userprofile.html"><i class="fa fa-user"></i>profile</a>
 </div>
 
+<!-- Main content container with glass effect -->
 <div class="glass">
+  <!-- Dynamic greeting populated by JS -->
   <h2 id="greeting">Welcome</h2>
   <p>Here are your saved courses:</p>
+  <!-- Container for dynamically rendered saved courses -->
   <div id="savedList"></div>
   <br>
   <button id="logoutBtn">Log out</button>
 </div>
+
+<!-- Footer with social media links -->
 <footer>
   <div class="social-links">
     <a href="https://www.facebook.com/share/1D8UUVruFP/?mibextid=wwXIfr" target="_blank"><i class="fab fa-facebook-f"></i></a>
@@ -36,6 +42,7 @@
 </footer>
 
 <script>
+  // Maps course names to their respective HTML files
   function getCourseUrl(courseName) {
     const key = (courseName || '').toLowerCase().trim();
     const map = {
@@ -60,19 +67,24 @@
     return username;
   }
 
+  // Loads user profile from localStorage
   function loadProfile(username) {
     const profileKey = `profile:${username}`;
     const profile = JSON.parse(localStorage.getItem(profileKey) || '{"username":"","savedCourses":[]}');
     return { profile, profileKey };
   }
 
+   // Renders the user's saved courses to the page
   function render() {
     const username = requireAuth();
     if(!username) return;
+     // Update greeting with username
     const { profile } = loadProfile(username);
+      // Get container for saved courses
     document.getElementById('greeting').textContent = `Welcome, ${username}`;
     const container = document.getElementById('savedList');
     container.innerHTML = '';
+    // Show message if no courses saved
     if(!profile.savedCourses || profile.savedCourses.length === 0) {
       container.textContent = 'No courses saved yet.';
       return;
@@ -83,6 +95,7 @@
       row.innerHTML = `<span>${c.name} - R${Number(c.price).toFixed(2)}</span>`;
       const actions = document.createElement('div');
       actions.className = 'actions';
+      // "Open course" button
       const openBtn = document.createElement('button');
       openBtn.textContent = 'Open course';
       openBtn.onclick = () => {
@@ -93,6 +106,7 @@
           alert('Course page not found for: ' + c.name);
         }
       };
+        // "Remove" button
       const removeBtn = document.createElement('button');
       removeBtn.textContent = 'Remove';
       removeBtn.onclick = () => removeCourse(idx);
@@ -103,6 +117,7 @@
     });
   }
 
+  // Removes a course from the saved list
   function removeCourse(index) {
     const username = localStorage.getItem('currentUser');
     const { profile, profileKey } = loadProfile(username);
@@ -111,6 +126,7 @@
     render();
   }
 
+  // Logout functionality
   document.getElementById('logoutBtn').addEventListener('click', function(){
     localStorage.removeItem('currentUser');
     window.location.href = 'homepage.html';
