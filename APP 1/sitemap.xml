@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <url>
+        <loc>homepage.html</loc>
+        <lastmod>2025-10-31</lastmod>
+    </url>
+    <url>
+        <loc>6month.html</loc>
+        <lastmod>2025-10-31</lastmod>
+    </url>
+    <url>
+        <loc>6week.html</loc>
+        <lastmod>2025-10-31</lastmod>
+    </url>
+    <url>
+        <loc>Quote.html</loc>
+        <lastmod>2025-10-31</lastmod>
+    </url>
+    <url>
+        <loc>contact.html</loc>
+        <lastmod>2025-10-31</lastmod>
+    </url>
+</urlset>
+<head>
+    <!-- Essential SEO meta tags -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="[Add unique description for each page]">
+    <meta name="keywords" content="[Add relevant keywords for each page]">
+    <title>[Unique title for each page] - Empowering the Nation</title>
+    
+    <!-- Your existing stylesheet links -->
+    // ...existing code...
+</head>
